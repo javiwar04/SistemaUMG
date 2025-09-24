@@ -5,26 +5,27 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 export function Login() {
-  // Estado para almacenar los valores de usuario y contraseña
   const [teacher, setTeacher] = useState({ usuario: '', password: '' });
-  const navigate = useNavigate(); // Hook de React Router para redirigir a otra ruta
+  const navigate = useNavigate(); // Hook para navegación
+
+  // Manejo del envío del formulario
 
   async function handleSubmit(e) {
-    e.preventDefault(); // Evita que la página se recargue al enviar el formulario
+    e.preventDefault(); // Evita el envío por defecto del formulario
 
     const form = e.target;
-    // Validación de Bootstrap: si el formulario no es válido, muestra mensajes de error
+    // Validación del formulario
     if (!form.checkValidity()) {
       form.classList.add('was-validated');
       return;
     }
 
     try {
-      // Llama a la función login de la API con los valores ingresados
+      // Llamada a la API para autenticar
       const response = await API.login(teacher.usuario, teacher.password);
 
       if (response) {
-        // Si el login es exitoso, guardamos el usuario en localStorage
+        // Si la autenticación es exitosa, guarda el usuario en localStorage
         localStorage.setItem('usuario', teacher.usuario);
 
         // Redirige al Dashboard

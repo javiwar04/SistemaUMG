@@ -6,9 +6,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://localhost:7263', // o http://127.0.0.1:5219 según tu backend
+        target: 'https://localhost:7263',
         changeOrigin: true,
-        secure: false, // permite cert dev
+        secure: false, // Use this if the target server uses self-signed certificates
       },
     },
   },
